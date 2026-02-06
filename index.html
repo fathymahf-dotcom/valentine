@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Saajiaakkaka, will you be my Valentine?</title>
+  <title>Saajiaakkaka will you be my Valentine</title>
 
   <style>
     * {
@@ -17,8 +17,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ffd6e8, #e0c3fc);
-      transition: background 0.6s ease;
+      background: linear-gradient(135deg, #ffd6e8, #fbcfe8);
       overflow: hidden;
     }
 
@@ -30,27 +29,21 @@
       text-align: center;
       max-width: 420px;
       width: 90%;
-      transition: all 0.6s ease;
     }
 
     h1 {
-      margin-bottom: 15px;
+      margin-bottom: 25px;
     }
 
     button {
-      padding: 12px 25px;
+      padding: 12px 28px;
       border: none;
       border-radius: 30px;
       font-size: 16px;
       cursor: pointer;
       margin: 10px;
-      transition: all 0.3s ease;
+      transition: 0.3s;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-
-    .refresh {
-      background: #ff8fab;
-      color: white;
     }
 
     .yes {
@@ -62,77 +55,50 @@
       position: relative;
     }
 
-    .hidden {
-      display: none;
-    }
-
     img {
-      margin-top: 20px;
       width: 260px;
       border-radius: 20px;
+      margin-top: 20px;
+    }
+
+    .love {
+      font-size: 22px;
+      color: #ff4d6d;
+      margin-top: 15px;
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container" id="screen404">
-    <h1>404</h1>
-    <p>Page Not Found 💔</p>
-    <button class="refresh" onclick="showValentine()">Refresh 🔄</button>
-  </div>
+  <div class="container">
+    <h1>Saajiaakkaka 💖<br>Will you be my Valentine?</h1>
 
-  <div class="container hidden" id="valentineScreen">
-    <h1>Saajiaakkaka, will you be my Valentine? 💖</h1>
     <button class="yes" id="yesBtn" onclick="yesClicked()">YES 💘</button>
     <button class="no" id="noBtn" onclick="noClicked()">NO 😝</button>
+
     <div id="result"></div>
   </div>
 
   <script>
-    let noCount = 0;
-
-    function showValentine() {
-      document.getElementById("screen404").classList.add("hidden");
-      document.getElementById("valentineScreen").classList.remove("hidden");
-    }
-
     function yesClicked() {
       document.getElementById("result").innerHTML = `
-        <h2>YAYYYY 🥰💃🕺</h2>
-        <p>By clicking YES you agree to:</p>
-        <ul style="list-style:none;padding:0;">
-          <li>💞 Unlimited cuddles</li>
-          <li>😜 Lifetime bad puns</li>
-          <li>🍕 Mutual pizza stealing rights</li>
-        </ul>
-        <p><b>Effective immediately! 🚀</b></p>
-        <img src="https://media.giphy.com/media/3M4NpbLCTxBqU/giphy.gif" />
+        <img src="https://media.tenor.com/w5nJm1zZ0W8AAAAC/cute-hug.gif" alt="hug gif">
+        <div class="love">I love you ❤️</div>
       `;
-
       document.getElementById("yesBtn").style.display = "none";
       document.getElementById("noBtn").style.display = "none";
     }
 
     function noClicked() {
-      noCount++;
-
       const btn = document.getElementById("noBtn");
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 120);
 
       btn.style.position = "absolute";
       btn.style.left = x + "px";
       btn.style.top = y + "px";
-
-      document.body.style.background =
-        `linear-gradient(135deg,
-          hsl(${Math.random()*360},80%,85%),
-          hsl(${Math.random()*360},80%,90%))`;
-
-      if (noCount >= 2) {
-        btn.innerHTML = "NO 😭";
-      }
     }
   </script>
 
