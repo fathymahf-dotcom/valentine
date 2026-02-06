@@ -1,223 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Page Not Found 💔</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saajiaakkaka, will you be my Valentine?</title>
 
-<style>
-  * {
-    box-sizing: border-box;
-    font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  }
-
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    transition: background 0.8s ease;
-  }
-
-  .container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 18px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    text-align: center;
-    width: 90%;
-    max-width: 420px;
-    position: relative;
-  }
-
-  h1 {
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-  }
-
-  p {
-    color: #555;
-    margin-bottom: 1.5rem;
-  }
-
-  button {
-    padding: 12px 28px;
-    border: none;
-    border-radius: 999px;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    transition: transform 0.2s ease, opacity 0.4s ease;
-  }
-
-  button:hover {
-    transform: scale(1.05);
-  }
-
-  .refresh {
-    background: #ff6f91;
-    color: white;
-  }
-
-  .hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .valentine {
-    display: none;
-  }
-
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    position: relative;
-  }
-
-  .yes {
-    background: #ff4d6d;
-    color: white;
-  }
-
-  .no {
-    background: #adb5bd;
-    color: white;
-    position: relative;
-  }
-
-  .agreement {
-    margin-top: 1.5rem;
-    font-size: 0.95rem;
-    display: none;
-  }
-
-  .confetti {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background: red;
-    top: -10px;
-    animation: fall linear forwards;
-    border-radius: 50%;
-  }
-
-  @keyframes fall {
-    to {
-      transform: translateY(110vh) rotate(360deg);
-      opacity: 0;
+  <style>
+    * {
+      font-family: "Poppins", sans-serif;
+      box-sizing: border-box;
     }
-  }
-</style>
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffd6e8, #e0c3fc);
+      transition: background 0.6s ease;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      transition: all 0.6s ease;
+    }
+
+    h1 {
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .refresh {
+      background: #ff8fab;
+      color: white;
+    }
+
+    .yes {
+      background: #6ee7b7;
+    }
+
+    .no {
+      background: #ff6b6b;
+      position: relative;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    img {
+      margin-top: 20px;
+      width: 260px;
+      border-radius: 20px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
-  <!-- 404 Screen -->
-  <div id="errorScreen">
-    <h1>404 💔</h1>
-    <p>Oops! Page Not Found</p>
-    <button class="refresh" onclick="showValentine()">Refresh</button>
+  <div class="container" id="screen404">
+    <h1>404</h1>
+    <p>Page Not Found 💔</p>
+    <button class="refresh" onclick="showValentine()">Refresh 🔄</button>
   </div>
 
-  <!-- Valentine Screen -->
-  <div id="valentineScreen" class="valentine">
-    <h1>Will you be my Valentine? <span id="heart">💔</span></h1>
-
-    <div class="buttons">
-      <button class="yes" id="yesBtn">YES</button>
-      <button class="no" id="noBtn">NO</button>
-    </div>
-
-    <div class="agreement" id="agreement">
-      <p><strong>By clicking YES you agree to:</strong></p>
-      <p>
-        ❤️ Unlimited cuddles<br>
-        🍕 Lifetime supply of bad puns<br>
-        😏 Mutual pizza stealing rights<br><br>
-        Effective immediately! 🚀
-      </p>
-    </div>
+  <div class="container hidden" id="valentineScreen">
+    <h1>Saajiaakkaka, will you be my Valentine? 💖</h1>
+    <button class="yes" id="yesBtn" onclick="yesClicked()">YES 💘</button>
+    <button class="no" id="noBtn" onclick="noClicked()">NO 😝</button>
+    <div id="result"></div>
   </div>
-</div>
 
-<script>
-  const errorScreen = document.getElementById("errorScreen");
-  const valentineScreen = document.getElementById("valentineScreen");
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const agreement = document.getElementById("agreement");
-  const heart = document.getElementById("heart");
+  <script>
+    let noCount = 0;
 
-  let noClicks = 0;
-
-  function showValentine() {
-    errorScreen.classList.add("hidden");
-    setTimeout(() => {
-      errorScreen.style.display = "none";
-      valentineScreen.style.display = "block";
-    }, 500);
-  }
-
-  noBtn.addEventListener("click", () => {
-    noClicks++;
-
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 60);
-
-    noBtn.style.position = "fixed";
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
-
-    const gradients = [
-      ["#ffdde1", "#ee9ca7"],
-      ["#cdb4db", "#ffc8dd"],
-      ["#a2d2ff", "#bde0fe"],
-      ["#ffd6a5", "#fdffb6"]
-    ];
-    const g = gradients[Math.floor(Math.random() * gradients.length)];
-    document.body.style.background = `linear-gradient(135deg, ${g[0]}, ${g[1]})`;
-
-    if (noClicks >= 2) {
-      heart.textContent = "😭";
+    function showValentine() {
+      document.getElementById("screen404").classList.add("hidden");
+      document.getElementById("valentineScreen").classList.remove("hidden");
     }
-  });
 
-  yesBtn.addEventListener("click", () => {
-    agreement.style.display = "block";
+    function yesClicked() {
+      document.getElementById("result").innerHTML = `
+        <h2>YAYYYY 🥰💃🕺</h2>
+        <p>By clicking YES you agree to:</p>
+        <ul style="list-style:none;padding:0;">
+          <li>💞 Unlimited cuddles</li>
+          <li>😜 Lifetime bad puns</li>
+          <li>🍕 Mutual pizza stealing rights</li>
+        </ul>
+        <p><b>Effective immediately! 🚀</b></p>
+        <img src="https://media.giphy.com/media/3M4NpbLCTxBqU/giphy.gif" />
+      `;
 
-    setTimeout(() => {
-      yesBtn.classList.add("hidden");
-      noBtn.classList.add("hidden");
-    }, 1000);
-
-    startConfetti();
-    setTimeout(stopConfetti, 5000);
-  });
-
-  function startConfetti() {
-    for (let i = 0; i < 150; i++) {
-      const confetti = document.createElement("div");
-      confetti.className = "confetti";
-      confetti.style.left = Math.random() * 100 + "vw";
-      confetti.style.background =
-        `hsl(${Math.random() * 360}, 80%, 60%)`;
-      confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
-      document.body.appendChild(confetti);
-
-      setTimeout(() => confetti.remove(), 5000);
+      document.getElementById("yesBtn").style.display = "none";
+      document.getElementById("noBtn").style.display = "none";
     }
-  }
 
-  function stopConfetti() {
-    document.querySelectorAll(".confetti").forEach(c => c.remove());
-  }
-</script>
+    function noClicked() {
+      noCount++;
+
+      const btn = document.getElementById("noBtn");
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+
+      btn.style.position = "absolute";
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
+
+      document.body.style.background =
+        `linear-gradient(135deg,
+          hsl(${Math.random()*360},80%,85%),
+          hsl(${Math.random()*360},80%,90%))`;
+
+      if (noCount >= 2) {
+        btn.innerHTML = "NO 😭";
+      }
+    }
+  </script>
 
 </body>
 </html>
