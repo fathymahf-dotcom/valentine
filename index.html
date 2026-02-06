@@ -143,21 +143,9 @@ function finalChoice(choice) {
   const gif = document.getElementById("finalGif");
   const caption = document.getElementById("caption");
 
-  // First 20 seconds
+  // First 5 seconds
   gif.src = choice === "kiss" ? "kiss.gif" : "dance.gif";
   caption.innerText = "wait for 3 more months babe 🥹😭";
 
   music.pause();
-  music.currentTime = 0;
-
-  // After 20 seconds → hug + song
-  setTimeout(() => {
-    gif.src = "hug.gif";
-    caption.innerText = "come here 🫂❤️";
-    music.play();
-  }, 20000);
-}
-</script>
-
-</body>
-</html>
+  music.currentTime
