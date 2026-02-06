@@ -58,7 +58,7 @@ button {
   display: none;
 }
 
-.hug-gif {
+.result-gif {
   width: 220px;
   border-radius: 20px;
   margin-top: 15px;
@@ -116,15 +116,22 @@ button {
   <!-- STEP 2 -->
   <div id="step2" class="hidden">
     <h1>How much do you love me? 🥹❤️</h1>
-    <button class="yes" onclick="finalYes()">More than words 💞</button>
-    <button class="yes" onclick="finalYes()">Infinity ♾️</button>
-    <button class="yes" onclick="finalYes()">More every day 💖</button>
+    <button class="yes" onclick="showStep3()">More than words 💞</button>
+    <button class="yes" onclick="showStep3()">Infinity ♾️</button>
+    <button class="yes" onclick="showStep3()">More every day 💖</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="hidden">
+    <h1>One last thing 😚<br>Kiss or Hug?</h1>
+    <button class="yes" onclick="finalChoice('kiss')">Kiss 💋</button>
+    <button class="yes" onclick="finalChoice('hug')">Hug 🤗</button>
   </div>
 
   <!-- FINAL -->
   <div id="final" class="hidden">
-    <img src="hug.gif" class="hug-gif" alt="hug">
-    <div class="love-text">I love you ❤️</div>
+    <img id="finalGif" class="result-gif" src="" alt="result">
+    <div class="love-text">idiot hug me now 🤗</div>
   </div>
 
 </div>
@@ -151,9 +158,18 @@ function showStep2() {
   document.getElementById("step2").classList.remove("hidden");
 }
 
-function finalYes() {
+function showStep3() {
   document.getElementById("step2").classList.add("hidden");
+  document.getElementById("step3").classList.remove("hidden");
+}
+
+function finalChoice(choice) {
+  document.getElementById("step3").classList.add("hidden");
   document.getElementById("final").classList.remove("hidden");
+
+  const gif = document.getElementById("finalGif");
+  gif.src = choice === "kiss" ? "kiss.gif" : "dance.gif";
+
   music.play();
   blastConfetti();
   startKisses();
