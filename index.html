@@ -1,188 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saajiaakkaka will you be my Valentine 💖</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Saajiaakkaka will you be my Valentine 💖</title>
 
-  <style>
-    * {
-      font-family: 'Poppins', sans-serif;
-      box-sizing: border-box;
-    }
+<style>
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ffd6e8, #ffeef4);
-      overflow: hidden;
-    }
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd6e8, #ffeef4);
+  overflow: hidden;
+}
 
-    .container {
-      background: white;
-      padding: 35px;
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      width: 320px;
-      position: relative;
-    }
+.container {
+  background: white;
+  padding: 35px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  width: 330px;
+}
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 25px;
-    }
+h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 8px;
+  transition: 0.3s;
+}
 
-    button {
-      padding: 10px 22px;
-      border: none;
-      border-radius: 30px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
 
-    #yesBtn {
-      background: #ff4d6d;
-      color: white;
-    }
+.no {
+  background: #ccc;
+}
 
-    #noBtn {
-      background: #ccc;
-    }
+.hidden {
+  display: none;
+}
 
-    .hidden {
-      display: none;
-    }
+.hug-gif {
+  width: 220px;
+  border-radius: 20px;
+  margin-top: 15px;
+}
 
-    .hug-gif {
-      width: 220px;
-      margin-top: 20px;
-      border-radius: 20px;
-    }
+.love-text {
+  margin-top: 12px;
+  font-size: 20px;
+  color: #ff4d6d;
+  font-weight: bold;
+}
 
-    .love-text {
-      margin-top: 15px;
-      font-size: 20px;
-      color: #ff4d6d;
-      font-weight: bold;
-    }
+/* Kiss animation */
+.kiss {
+  position: fixed;
+  font-size: 26px;
+  animation: floatUp 3s linear forwards;
+}
 
-    /* Kiss emojis */
-    .kiss {
-      position: fixed;
-      font-size: 26px;
-      animation: floatUp 3s linear forwards;
-    }
+@keyframes floatUp {
+  to {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+}
 
-    @keyframes floatUp {
-      from {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-200px);
-        opacity: 0;
-      }
-    }
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  animation: fall 4s linear forwards;
+}
 
-    /* Confetti */
-    .confetti {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: red;
-      animation: fall 4s linear forwards;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-  </style>
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container" id="card">
+<div class="container">
+
+  <!-- STEP 1 -->
+  <div id="step1">
     <h1>Saajiaakkaka 💖<br>Will you be my Valentine?</h1>
-
-    <div class="buttons" id="buttons">
-      <button id="yesBtn">YES</button>
-      <button id="noBtn">NO</button>
-    </div>
-
-    <div id="result" class="hidden">
-      <img src="hug.gif" class="hug-gif" alt="hug gif">
-      <div class="love-text">I love you ❤️</div>
-    </div>
+    <button class="yes" onclick="showStep2()">YES</button>
+    <button class="no" id="noBtn">NO</button>
   </div>
 
-  <!-- Music -->
-  <audio id="music" loop>
-    <source src="dillagana.mp3" type="audio/mpeg">
-  </audio>
+  <!-- STEP 2 -->
+  <div id="step2" class="hidden">
+    <h1>How much do you love me? 🥹❤️</h1>
+    <button class="yes" onclick="finalYes()">More than words 💞</button>
+    <button class="yes" onclick="finalYes()">Infinity ♾️</button>
+    <button class="yes" onclick="finalYes()">More every day 💖</button>
+  </div>
 
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const buttons = document.getElementById("buttons");
-    const result = document.getElementById("result");
-    const music = document.getElementById("music");
+  <!-- FINAL -->
+  <div id="final" class="hidden">
+    <img src="hug.gif" class="hug-gif" alt="hug">
+    <div class="love-text">I love you ❤️</div>
+  </div>
 
-    yesBtn.onclick = () => {
-      buttons.classList.add("hidden");
-      result.classList.remove("hidden");
-      music.play();
-      blastConfetti();
-      startKisses();
-    };
+</div>
 
-    noBtn.onclick = () => {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.position = "fixed";
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    };
+<!-- Music -->
+<audio id="music" loop>
+  <source src="dillagana.mp3" type="audio/mpeg">
+</audio>
 
-    function blastConfetti() {
-      for (let i = 0; i < 60; i++) {
-        const confetti = document.createElement("div");
-        confetti.classList.add("confetti");
-        confetti.style.left = Math.random() * window.innerWidth + "px";
-        confetti.style.background =
-          `hsl(${Math.random() * 360}, 100%, 60%)`;
-        document.body.appendChild(confetti);
+<script>
+const noBtn = document.getElementById("noBtn");
+const music = document.getElementById("music");
 
-        setTimeout(() => confetti.remove(), 4000);
-      }
-    }
+noBtn.onclick = () => {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+  noBtn.style.position = "fixed";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+};
 
-    function startKisses() {
-      setInterval(() => {
-        const kiss = document.createElement("div");
-        kiss.classList.add("kiss");
-        kiss.innerText = "💋";
-        kiss.style.left = Math.random() * window.innerWidth + "px";
-        kiss.style.bottom = "0px";
-        document.body.appendChild(kiss);
+function showStep2() {
+  document.getElementById("step1").classList.add("hidden");
+  document.getElementById("step2").classList.remove("hidden");
+}
 
-        setTimeout(() => kiss.remove(), 3000);
-      }, 300);
-    }
-  </script>
+function finalYes() {
+  document.getElementById("step2").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+  music.play();
+  blastConfetti();
+  startKisses();
+}
+
+function blastConfetti() {
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+}
+
+function startKisses() {
+  setInterval(() => {
+    const k = document.createElement("div");
+    k.className = "kiss";
+    k.innerText = "💋";
+    k.style.left = Math.random() * window.innerWidth + "px";
+    k.style.bottom = "0px";
+    document.body.appendChild(k);
+    setTimeout(() => k.remove(), 3000);
+  }, 300);
+}
+</script>
 
 </body>
 </html>
