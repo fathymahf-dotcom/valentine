@@ -42,7 +42,6 @@ button {
   font-size: 15px;
   cursor: pointer;
   margin: 8px;
-  transition: 0.3s;
 }
 
 .yes {
@@ -123,7 +122,7 @@ button {
   <div id="final" class="hidden">
     <img src="hug.gif" class="hug-gif" alt="hug">
     <div class="love-text">I love you ❤️</div>
-    <button class="yes" onclick="music.play()">Play Music 🎵</button>
+    <button class="yes" id="playMusicBtn">Tap to Play Music 🎵</button>
   </div>
 
 </div>
@@ -140,6 +139,7 @@ const finalStep = document.getElementById("final");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const music = document.getElementById("music");
+const playBtn = document.getElementById("playMusicBtn");
 
 /* YES -> STEP 2 */
 yesBtn.addEventListener("click", () => {
@@ -147,23 +147,20 @@ yesBtn.addEventListener("click", () => {
   step2.classList.remove("hidden");
 });
 
-/* STEP 2 OPTIONS -> FINAL */
+/* STEP 2 -> FINAL */
 document.querySelectorAll(".option").forEach(btn => {
   btn.addEventListener("click", () => {
     step2.classList.add("hidden");
     finalStep.classList.remove("hidden");
-
-    /* MOBILE-SAFE MUSIC PLAY */
-    music.currentTime = 0;
-    music.play().catch(() => {
-      document.body.addEventListener("click", () => {
-        music.play();
-      }, { once: true });
-    });
-
     blastConfetti();
     startKisses();
   });
+});
+
+/* PLAY MUSIC (MOBILE SAFE) */
+playBtn.addEventListener("click", () => {
+  music.currentTime = 0;
+  music.play();
 });
 
 /* NO button jump */
