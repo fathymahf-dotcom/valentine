@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Saajiaakkaka will you be my Valentine 💖</title>
+<title>Will you be my Valentine 💖</title>
 
 <style>
 * {
@@ -65,39 +65,10 @@ button {
 }
 
 .love-text {
-  margin-top: 12px;
-  font-size: 20px;
+  margin-top: 15px;
+  font-size: 18px;
   color: #ff4d6d;
   font-weight: bold;
-}
-
-/* Kiss animation */
-.kiss {
-  position: fixed;
-  font-size: 26px;
-  animation: floatUp 3s linear forwards;
-}
-
-@keyframes floatUp {
-  to {
-    transform: translateY(-200px);
-    opacity: 0;
-  }
-}
-
-/* Confetti */
-.confetti {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  animation: fall 4s linear forwards;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
 }
 </style>
 </head>
@@ -131,13 +102,15 @@ button {
   <!-- FINAL -->
   <div id="final" class="hidden">
     <img id="finalGif" class="result-gif" src="" alt="result">
-    <div class="love-text">idiot hug me now 🤗</div>
+    <div id="caption" class="love-text">
+      wait for 3 more months babe 🥹😭
+    </div>
   </div>
 
 </div>
 
 <!-- Music -->
-<audio id="music" loop>
+<audio id="music">
   <source src="dillagana.mp3" type="audio/mpeg">
 </audio>
 
@@ -146,8 +119,8 @@ const noBtn = document.getElementById("noBtn");
 const music = document.getElementById("music");
 
 noBtn.onclick = () => {
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 50);
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 60);
   noBtn.style.position = "fixed";
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
@@ -168,34 +141,21 @@ function finalChoice(choice) {
   document.getElementById("final").classList.remove("hidden");
 
   const gif = document.getElementById("finalGif");
+  const caption = document.getElementById("caption");
+
+  // First 20 seconds
   gif.src = choice === "kiss" ? "kiss.gif" : "dance.gif";
+  caption.innerText = "wait for 3 more months babe 🥹😭";
 
-  music.play();
-  blastConfetti();
-  startKisses();
-}
+  music.pause();
+  music.currentTime = 0;
 
-function blastConfetti() {
-  for (let i = 0; i < 60; i++) {
-    const c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random() * window.innerWidth + "px";
-    c.style.background = `hsl(${Math.random()*360},100%,60%)`;
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 4000);
-  }
-}
-
-function startKisses() {
-  setInterval(() => {
-    const k = document.createElement("div");
-    k.className = "kiss";
-    k.innerText = "💋";
-    k.style.left = Math.random() * window.innerWidth + "px";
-    k.style.bottom = "0px";
-    document.body.appendChild(k);
-    setTimeout(() => k.remove(), 3000);
-  }, 300);
+  // After 20 seconds → hug + song
+  setTimeout(() => {
+    gif.src = "hug.gif";
+    caption.innerText = "come here 🫂❤️";
+    music.play();
+  }, 20000);
 }
 </script>
 
